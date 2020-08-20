@@ -203,4 +203,9 @@ class Entreprise
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->nomEntreprise.' '.$this->ninea;
+    }
 }

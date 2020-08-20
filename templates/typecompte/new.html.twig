@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Typecompte{% endblock %}
+
+{% block body %}
+    <h1>Create new Typecompte</h1>
+
+    {{ include('typecompte/_form.html.twig') }}
+
+    <a href="{{ path('typecompte_index') }}">back to list</a>
+{% endblock %}

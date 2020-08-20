@@ -1,0 +1,124 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Client Entreprise
+{% endblock %}
+
+{% block body %}
+    {% include 'template/topbar.html.twig' %}
+    {% include 'template/left.html.twig' %}
+    
+    <div class=" col-lg-9" style="margin-top: 20px;" id="contain">
+        <div id="panel-table">
+            <input type="button" class="btn btn-primary  btn-sm " id="ajouter" value="Ajouter">
+
+            <div class="card">
+                <div class="card-header bg-info text-white">Liste des clients entreprises:::</div>
+                <div class="card-body">
+                     {{ dump(listeEntreprises) }}
+                    <table id="listeEntreprise" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th class="th-sm">Nom</th>
+                                <th class="th-sm">Ninea</th>
+                                <th class="th-sm">Telephone</th>
+                                <th class="th-sm">Adresse</th>
+                                <th class="th-sm">Email</th>
+                                <th class="th-sm">action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for entreprise in listeEntreprises %}
+                                <tr>
+                                    <td>{{ entreprise.nomEntreprise }}</td>
+                                    <td>{{ entreprise.ninea }}</td>
+                                    <td>{{ entreprise.telephone }}</td>
+                                    <td>{{ entreprise.adresse }}</td>
+                                    <td>{{ entreprise.email }}</td>
+                                    <td>
+                                        <a href="#" class="btn btn-info btn-sm">Editer</a>
+                                        <a href="#" class="btn btn-danger btn-sm">Suprimer</a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="3">Liste vide</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer"></div>
+            </div>
+        </div>
+        <div id="panel-ajout" class="col-12">
+            <button class="btn btn-primary btn-sm " id="liste"> Lister des Entreprises </button>
+            <div class=" card">
+                <div class="card-header bg-info text-white">Ajout Entreprise </div>
+                <div class="card-body col-12">
+                    {{ form_start(form) }}
+
+                    <div class="row">
+                        <div class="form-group col-6">
+                            {{ form_label(form.nomEntreprise) }}
+                            {{ form_widget(form.nomEntreprise) }}
+                        </div>
+                        <div class="form-group  col-6">
+                            {{ form_label(form.ninea)}}
+                            {{ form_widget(form.ninea)}}
+                        </div>
+                        <div class="form-group col-6">
+                            {{ form_label(form.telephone)}}
+                            {{ form_widget(form.telephone)}}
+                        </div>
+                        <div class="form-group col-6">
+                            {{ form_label(form.adresse)}}
+                            {{ form_widget(form.adresse)}}
+                        </div>
+                        <div class="form-group col-6">
+                            {{ form_label(form.email)}}
+                            {{ form_widget(form.email)}}
+                        </div>
+                        <div class="form-group col-6">
+                            {{ form_label(form.budget)}}
+                            {{ form_widget(form.budget)}}
+                        </div>
+                        <div class="form-group col-12">
+                            <button class="btn btn-success float-right">Envoyer</button>
+                        </div>
+                        </div>
+                    {{ form_end(form) }}
+                </div>
+                <div class="card-footer"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+     {% block javascripts %}
+            <script src="{{ asset('js/jquery.min.js') }}"></script>
+            <script src="{{ asset('node_modules/bootstrap/dist/js/bootstrap.min.js') }}" integrity="sha384-XEerZL0cuoUbHE4nZReLT7nx9gQrQreJekYhJD9WNWhH8nEW+0c5qq7aIo2Wl30J" crossorigin="anonymous"></script>
+            <script src="{{ asset('node_modules/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+            <script src="{{ asset('node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+            <script src="{{ asset('js/iframe.js') }}"></script>
+            <script src="{{ asset('js/jquery.validate.min.js') }}"></script>
+            <script src="{{ asset('js/jquery.validate.translations.fr-FR.js') }}"></script>
+            <script>
+                $(document).ready(function() {
+                    $('#panel-ajout').hide();
+                    $('#panel-table').show();
+
+                    $('#ajouter').click(function(){
+                         $('#panel-ajout').show();
+                        $('#panel-table').hide();
+                    })
+                    $('#liste').click(function() {
+                        $('#panel-ajout').hide();
+                        $('#panel-table').show();
+                    });
+                    $('#listeEntreprise,#listePhysique').DataTable();
+                } );
+                </script>   
+        {% endblock %}

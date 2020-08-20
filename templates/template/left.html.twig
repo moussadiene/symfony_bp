@@ -1,0 +1,39 @@
+
+{% block body %}
+  
+      <div class="col-lg-3" id="left" style="margin-top: 20px;">
+        <div class="card">
+            <div class="card-body row">
+                <img src="{{asset('image/Profil.jpg')}}" class="img-responsive rounded-circle col-lg-5" alt="Profil">
+                <div class="col-lg-7">
+                  <h6 class="card-title">Moussa DIENE</h6>
+                  <p class="card-text"><i> Responsable</i>.</p>
+                                  <a href="https://github.com/moussadiene" class="btn btn-info btn-block"  target="_blank">profil</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card col-12 bg-info" style="margin-top: 20px;">
+          <div class="card-body">
+            <nav class="navbar navbar-dark bg-info col-lg-12">
+              <ul class="navbar-nav col-lg-12">
+                  <li class="nav-item dash active ">
+                      <a class="nav-link" href="{$url_base}Dashboad"><span class="fa fa-home"></span> &ThinSpace;&ThinSpace; Dashboad</a>
+                  </li>
+                  <li class="nav-item client">
+                      <!-- <a class="nav-link" href="#" id="ok"><span class="fa fa-user"></span> &ThinSpace;&ThinSpace;Gestion Client</a> -->
+                      <a class="nav-link" href="{{ path('client')}}"><span class="fa fa-user"></span> &ThinSpace;&ThinSpace;Gestion Client</a>
+                  </li>
+                  <li class="nav-item Entreprise">
+                      <a class="nav-link" href="{{ path('entreprise')}}"><i class="fas fa-briefcase"></i> &ThinSpace;&ThinSpace;Gestion Entreprise</a>
+                  </li>
+                  <li class="nav-item compte">
+                      <a class="nav-link" href="{{ path('compte')}}"><i class="fas fa-briefcase"></i> &ThinSpace;&ThinSpace;Gestion Compte</a>
+                  </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Typecompte{% endblock %}
+
+{% block body %}
+    <h1>Typecompte</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ typecompte.id }}</td>
+            </tr>
+            <tr>
+                <th>Libelle</th>
+                <td>{{ typecompte.libelle }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('typecompte_index') }}">back to list</a>
+
+    <a href="{{ path('typecompte_edit', {'id': typecompte.id}) }}">edit</a>
+
+    {{ include('typecompte/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,165 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Client Physique
+{% endblock %}
+
+{% block body %}
+    {% include 'template/topbar.html.twig' %}
+    {% include 'template/left.html.twig' %}
+    
+    <div class=" col-lg-9" style="margin-top: 20px;" id="contain">
+        <div id="panel-table">
+            <input type="button" class="btn btn-primary  btn-sm " id="ajouter" value="Ajouter">
+
+            <div class="card">
+                <div class="card-header bg-info text-white">Liste des clients :::</div>
+                <div class="card-body">
+                    <table id="listePhysique" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th class="th-sm">Matricule</th>
+                                <th class="th-sm">Prenom</th>
+                                <th class="th-sm">Nom</th>
+                                <th class="th-sm">Cni</th>
+                                <th class="th-sm">Email</th>
+                                <th class="th-sm">Entreprise</th>
+                                <th class="th-sm">Salaire</th>
+                                <th class="th-sm">action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                         <pre>
+                            
+                            {% for client in listeClients %}
+                                <tr>
+                                    <td>{{ client.matricule }}</td>
+                                    <td>{{ client.prenom }}</td>
+                                    <td>{{ client.nom }}</td>
+                                    <td>{{ client.cni }}</td>
+                                    <td>{{ client.email }}</td>
+                                    <td>{{ client.entreprise.nomEntreprise }}</td>
+                                    <td>{{ client.salaire }}</td>
+                                    
+                                    <td>
+                                        <a href="#" class="btn btn-info btn-sm">Edit</a>
+                                        <a href="#" class="btn btn-danger btn-sm">Sup</a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="7">Liste vide</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer"></div>
+            </div>
+        </div>
+        <div id="panel-ajout" class="col-12">
+            <button class="btn btn-primary btn-sm " id="liste"> Lister des clients </button>
+            <div class=" card">
+                <div class="card-header bg-info text-white">Ajout Entreprise </div>
+                <div class="card-body col-12">
+                    {{ form_start(form) }}
+                    
+                    <div class="row">
+                        <div class="form-group col-6">
+                            {{ form_label(form.prenom) }}
+                            {{ form_widget(form.prenom) }}
+                        </div>
+                        <div class="form-group col-6">
+                            {{ form_label(form.nom) }}
+                            {{ form_widget(form.nom) }}
+                        </div>
+                        <div class="form-group  col-6">
+                            {{ form_label(form.cni)}}
+                            {{ form_widget(form.cni)}}
+                        </div>
+                        <div class="form-group col-6">
+                            {{ form_label(form.adresse)}}
+                            {{ form_widget(form.adresse)}}
+                        </div>
+                        <div class="form-group col-6">
+                            {{ form_label(form.sexe)}}
+                            {{ form_widget(form.sexe)}}
+                        </div>
+                        <div class="form-group col-6">
+                            {{ form_label(form.dateNaiss)}}
+                            {{ form_widget(form.dateNaiss)}}
+                        </div>
+                        <div class="form-group col-6">
+                            {{ form_label(form.telephone)}}
+                            {{ form_widget(form.telephone)}}
+                        </div>
+                         <div class="form-group col-6">
+                            {{ form_label(form.email)}}
+                            {{ form_widget(form.email)}}
+                        </div>
+                        <div class="form-group col-8">
+                            <div class="radio radio-info col-lg-12">
+                                    <hr>
+                                    <label class="container">Travailleur ?
+                                        <input list="listeEntreprise" type="checkbox" id="employeur" value="employeur">
+                                        <span class="checkmark checkbox-single"></span>
+                                    </label>
+                                </div>
+                        </div>
+                        <div class="form-group col-6 employeur">
+                            {{ form_label(form.entreprise)}}
+                            {{ form_widget(form.entreprise)}}
+                        </div>
+                        <div class="form-group col-6 employeur">
+                            {{ form_label(form.salaire)}}
+                            {{ form_widget(form.salaire)}}
+                        </div>
+                        <div class="form-group col-12">
+                            <button class="btn btn-success float-right">Envoyer</button>
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+     {% block javascripts %}
+            <script src="{{ asset('js/jquery.min.js') }}"></script>
+            <script src="{{ asset('node_modules/bootstrap/dist/js/bootstrap.min.js') }}" integrity="sha384-XEerZL0cuoUbHE4nZReLT7nx9gQrQreJekYhJD9WNWhH8nEW+0c5qq7aIo2Wl30J" crossorigin="anonymous"></script>
+            <script src="{{ asset('node_modules/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+            <script src="{{ asset('node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+            <script src="{{ asset('js/iframe.js') }}"></script>
+            <script src="{{ asset('js/jquery.validate.min.js') }}"></script>
+            <script src="{{ asset('js/jquery.validate.translations.fr-FR.js') }}"></script>
+            <script>
+                $(document).ready(function() {
+                    $('#panel-ajout').hide();
+                    $('#panel-table').show();
+                    $('.employeur').hide();
+
+                    $('#ajouter').click(function(){
+                         $('#panel-ajout').show();
+                        $('#panel-table').hide();
+                    })
+                    $('#liste').click(function() {
+                        $('#panel-ajout').hide();
+                        $('#panel-table').show();
+                    });
+                    $('#listeEntreprise,#listePhysique').DataTable();
+                    
+
+                    $('#employeur').on('click', function() {
+                        if ($(this).is(':checked') == true) {
+                            $('.employeur').show();
+                        } else {
+                            $('.employeur').hide();
+                        }
+                    });
+                } );
+                </script>   
+        {% endblock %}

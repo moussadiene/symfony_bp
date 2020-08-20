@@ -1,0 +1,44 @@
+
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Liste Entreprise
+{% endblock %}
+
+{% block body %}
+    <h1>Liste Entreprise</h1>
+
+    {{ form_start(form) }}
+
+        <div class="form-group">
+            {{ form_label(form.nomEntreprise) }}
+            {{ form_widget(form.nomEntreprise) }}
+        </div>
+         <div class="form-group">
+            {{ form_label(form.ninea)}}
+            {{ form_widget(form.ninea)}}
+        </div>
+         <div class="form-group">
+            {{ form_label(form.telephone)}}
+            {{ form_widget(form.telephone)}}
+        </div>
+         <div class="form-group">
+            {{ form_label(form.adresse)}}
+            {{ form_widget(form.adresse)}}
+        </div>
+         <div class="form-group">
+            {{ form_label(form.email)}}
+            {{ form_widget(form.email)}}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.budget)}}
+            {{ form_widget(form.budget)}}
+        </div>
+         <div class="form-group">
+            <button>Ajouter</button>
+        </div>
+
+    {{ form_end(form) }}
+
+{% endblock %}
+
