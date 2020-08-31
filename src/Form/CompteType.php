@@ -80,7 +80,7 @@ class CompteType extends AbstractType
                 'attr' => array(
                     'class' => 'form-control ',
                     'id' => 'entreprise_id',
-                    'required ' => false
+                    'required ' => 'none'
                 )
             ])
             ->add('typecompte', EntityType::class, [

@@ -34,7 +34,7 @@ class EntrepriseController extends AbstractController{
     public function index(Request $request,EntrepriseRepository $entrepriseDB) : Response
     {
         $ense = new Entreprise();
-        
+
         $form = $this->createForm(EntrepriseType::class, $ense);
         $form->handleRequest($request);
         if( $form->isSubmitted() && $form->isValid()){
